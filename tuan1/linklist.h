@@ -45,7 +45,7 @@ Node*searchNode(Node*header,Node*node){
 
 Node*searchNodeContent(Node*header,char*text){
 	int check=0;
-	if(header!=NULL || node!=NULL)
+	if(header!=NULL)
 	for(;header->next!=NULL;header=header->next){
 		if(header->text!=NULL && text!=NULL &&strcmp(header->text,text)==0){
 			check=1;
