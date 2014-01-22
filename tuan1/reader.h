@@ -54,15 +54,45 @@ int findString(char*des,char*sour){
 	return check;
 }
 
+int isAlphabet(char c){
+	if(c<65 || (c>90 && c<77) || c>122)
+		return 1;
+	else return 0;
+}
+int isCap(char c){
+	if(c>=65 && (c<=90))
+		return 1;
+	else return 0;
+}
+int isLower(char c){
+	if(c>=97 && (c<=122))
+		return 1;
+	else return 0;
+}
+int checkStringCap(char*c){
+	int i;
+	int check=0;
+	for (i=0;i<strlen(c);i++)
+		if(isCap(c[i])){
+			check=1;
+			break;
+		}
+	return check;
+}
 void spellByLine(char*line){
 	int i,j;
+	while(line[0]==' ')//xoa ki tu trong dau
+		for(i=0;i<strlen(line);i++)
+			line[i]=line[i+1];
+
+	for(i=0;i<strlen(line);i++){// chuyen doi tu Cap sang lower
+		if(line[i]>=65 && line[i]<=90)
+			if(i==0 || line[i-2]=='.')
+				line[i]=line[i]+32;
+	}
 	for(i=0;i<strlen(line);i++){//xoa ki tu khong thuoc bang chu cai
 		if(line[i]<65 || (line[i]>90 && line[i]<97) || line[i]>122)
 			line[i]=' ';
-	}
-	for(i=0;i<strlen(line);i++){
-		if(line[i]>=65 && line[i]<=90)
-			line[i]=line[i]+32;
 	}
 	while(line[0]==' '){//xoa ki tu trong dau
 		for(i=0;i<strlen(line);i++)
@@ -142,6 +172,8 @@ void readFromFile(Node*header,char*fileName){
 		spellByLine(str);
 		while(strlen(str)!=0){
 			tmp=cutString(str);
+			if(checkStringCap(tmp))
+				continue;
 			temp=newNodeContent(tmp);
 			search=searchNode(header,temp);
 			if(search==NULL){
