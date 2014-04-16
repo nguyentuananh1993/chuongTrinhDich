@@ -1,0 +1,8 @@
+Program Example1; (* Example 1 *)
+Begin
+n:= 0.123;
+	n:=123;
+	while n<1 do
+		a :="0.123\n
+\t anhnt";
+End. (* Example 1 *)
